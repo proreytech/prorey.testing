@@ -20,13 +20,13 @@
 
 ### PRT Infra Deployment
 
-* Create PRT S3 Bucket and upload provided PRT packages to `/code` folder, see [Deploy PRT Lambdas package](README.md) and [Deploy PRT Layers](README.md#deploy_prt_layers) sections
+* Create PRT S3 Bucket and upload provided PRT packages to `/code` folder, see **Deploy PRT Lambdas package** and **Deploy PRT Layers** sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template `prt-infra.yaml`, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
 * Add IAM policies to `prt-lambda-role-<StackIdentifier>` role to grant resources access to PRT Adapter Lambdas, see eg `prt-adapters-policy.json`
 * API Gateway integration timeout could be increased from 29 seconds to 3 minutes by AWS service limit increase request
-* For PRT Cron Trigger tests execution configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see [Run PRT tests with AWS Cron Trigger](#run_prt_tests_with_aws_cron_trigger) section
-* For PRT Mock virtualization service upload mocks to PRT S3 Bucket, see [Configure PRT Mocks](#configure_prt_mocks) section
+* For PRT Cron Trigger tests execution configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see **Run PRT tests with AWS Cron Trigger** section
+* For PRT Mock virtualization service upload mocks to PRT S3 Bucket, see **Configure PRT Mocks** section
 
 ### Running PRT Tests
 
