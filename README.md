@@ -20,7 +20,7 @@
 
 ### PRT Infra Deployment
 
-* Create PRT S3 Bucket and upload provided PRT packages to `/code` folder, see [Deploy PRT Lambdas package](#deploy_prt_lambdas_package) and [Deploy PRT Layers](#deploy_prt_layers) sections
+* Create PRT S3 Bucket and upload provided PRT packages to `/code` folder, see [Deploy PRT Lambdas package](README.md#deploy_prt_lambdas_package) and [Deploy PRT Layers](#deploy_prt_layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template `prt-infra.yaml`, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
 * Add IAM policies to `prt-lambda-role-<StackIdentifier>` role to grant resources access to PRT Adapter Lambdas, see eg `prt-adapters-policy.json`
