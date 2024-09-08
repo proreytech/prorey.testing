@@ -1,6 +1,6 @@
 # ProRey Testing
 
-![PRT Architecture](prt-schema.png)
+![PRT Architecture](prt-architecture.png)
 
  **PRT** ProRey Testing is Serverless Application orchestrating parallel Lambda Input/Output Adapter tests with Step Function.
 
