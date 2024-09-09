@@ -563,48 +563,41 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
 
 PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 
-Download package from `/code/prt-lambdas.zip`
-
-* You could also build package from source with
-  ```
-  zip prt-lambdas.zip *.py
-  ```
-
-Upload `prt-lambdas.zip` file to `/code` folder
+* Download package from `/code/prt-lambdas.zip`
+    * You could also build package from source with
+      ```
+      zip prt-lambdas.zip *.py
+      ```
+* Upload `prt-lambdas.zip` file to `/code` folder
 
 ### Deploy PRT Layers
 
 #### Deploy PRT Util Layer
 
-Download layer from `/code/prt-util-layer.zip`
-
-* You could also build layer from sources with
-  ```shell
-  python3.11 -m pip install -r prt-util-layer.txt -t util-layer/python/lib/python3.11/site-packages/
-  cd util-layer
-  zip -r prt-util-layer.zip python
-  ```
-
-Upload `prt-util-layer.zip` file to `/code` folder
+* Download layer from `/code/prt-util-layer.zip`
+    * You could also build layer from sources with
+      ```shell
+      python3.11 -m pip install -r prt-util-layer.txt -t util-layer/python/lib/python3.11/site-packages/
+      cd util-layer
+      zip -r prt-util-layer.zip python
+      ```
+* Upload `prt-util-layer.zip` file to `/code` folder
 
 #### Deploy PRT Aurora Layer
 
-Download layer from `/code/prt-aurora-layer.zip`
-
-* You could also build layer from sources with
-  ```shell
-  python3.11 -m pip install -r prt-aurora-layer.txt -t aurora-layer/python/lib/python3.11/site-packages/
-  cd aurora-layer
-  zip -r prt-aurora-layer.zip python
-  ```
-
-Upload `prt-aurora-layer.zip` file to `/code` folder
+* Download layer from `/code/prt-aurora-layer.zip`
+    * You could also build layer from sources with
+      ```shell
+      python3.11 -m pip install -r prt-aurora-layer.txt -t aurora-layer/python/lib/python3.11/site-packages/
+      cd aurora-layer
+      zip -r prt-aurora-layer.zip python
+      ```
+* Upload `prt-aurora-layer.zip` file to `/code` folder
 
 #### Deploy AWS Pandas Layer
 
-Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
-
-Upload `AWSSDKPandas-Python311.zip` file to `/code` folder
+* Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
+* Upload `AWSSDKPandas-Python311.zip` file to `/code` folder
 
 # PRT Mock
 
