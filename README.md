@@ -1,5 +1,7 @@
 # ProRey Testing
 
+![Logo](prorey-logo.png)
+
 by [ProRey Tech](https://prorey.com)
 
 ![PRT Architecture](prt-schema.png)
