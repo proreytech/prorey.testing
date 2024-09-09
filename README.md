@@ -568,7 +568,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       ```
       zip prt-lambdas.zip *.py
       ```
-* Upload `prt-lambdas.zip` file to `/code` folder
+* Upload `prt-lambdas.zip` file to PRT S3 `/code` folder
 
 ### Deploy PRT Layers
 
@@ -581,7 +581,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       cd util-layer
       zip -r prt-util-layer.zip python
       ```
-* Upload `prt-util-layer.zip` file to `/code` folder
+* Upload `prt-util-layer.zip` file to PRT S3 `/code` folder
 
 #### Deploy PRT Aurora Layer
 
@@ -592,12 +592,12 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       cd aurora-layer
       zip -r prt-aurora-layer.zip python
       ```
-* Upload `prt-aurora-layer.zip` file to `/code` folder
+* Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder
 
 #### Deploy AWS Pandas Layer
 
 * Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
-* Upload `AWSSDKPandas-Python311.zip` file to `/code` folder
+* Upload `AWSSDKPandas-Python311.zip` file to PRT S3 `/code` folder
 
 # PRT Mock
 
