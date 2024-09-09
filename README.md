@@ -1,6 +1,6 @@
 # ProRey Testing
 
-![Logo](proreyLogo-lrg.png)
+![Logo](prorey-logo.png)
 
 by [ProRey Tech](https://prorey.com)
 
