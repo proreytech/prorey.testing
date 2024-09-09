@@ -1,10 +1,10 @@
 # ProRey Testing
 
-![PRT Architecture](prt-architecture.png)
+by [ProRey Tech](https://prorey.com)
 
- **PRT** ProRey Testing is Serverless Application orchestrating parallel Lambda Input/Output Adapter tests with Step Function. 
- 
- If interested please visit [ProRey Tech](https://prorey.com)
+![PRT Architecture](prt-schema.png)
+
+ **PRT** ProRey Testing is Serverless Application orchestrating parallel Lambda Input/Output Adapter tests with Step Function.
 
 ### PRT Overview
 
@@ -22,13 +22,13 @@
 
 ### PRT Infra Deployment
 
-* Create PRT S3 Bucket and upload provided PRT packages to `/code` folder, see **Deploy PRT Lambdas package** and **Deploy PRT Layers** sections
+* Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template `prt-infra.yaml`, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
 * Add IAM policies to `prt-lambda-role-<StackIdentifier>` role to grant resources access to PRT Adapter Lambdas, see eg `prt-adapters-policy.json`
     * API Gateway integration timeout could be increased from default max 29 seconds to 3 minutes by AWS service limit increase request
-    * For PRT Cron Trigger tests execution, configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see **Run PRT tests with AWS Cron Trigger** section
-    * For PRT Mock virtualization, upload mocks to PRT S3 Bucket, see **Configure PRT Mocks** section
+    * For PRT Cron Trigger tests execution, configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see [Run PRT tests with AWS Cron Trigger](#run-prt-tests-with-aws-cron-trigger) section
+    * For PRT Mock virtualization, upload mocks to PRT S3 Bucket, see [Configure PRT Mocks](#configure-prt-mocks) section
 
 ### Running PRT Tests
 
@@ -561,7 +561,7 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
 
 PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 
-Download package from TBD
+Download package from `/code/prt-lambdas.zip`
 
 * You could also build package from source with
   ```
@@ -574,7 +574,7 @@ Upload `prt-lambdas.zip` file to `/code` folder
 
 #### Deploy PRT Util Layer
 
-Download layer from TBD
+Download layer from `/code/prt-util-layer.zip`
 
 * You could also build layer from sources with
   ```shell
@@ -587,7 +587,7 @@ Upload `prt-util-layer.zip` file to `/code` folder
 
 #### Deploy PRT Aurora Layer
 
-Download layer from TBD
+Download layer from `/code/prt-aurora-layer.zip`
 
 * You could also build layer from sources with
   ```shell
