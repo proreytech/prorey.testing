@@ -1,12 +1,10 @@
 # ProRey Testing
 
-![Logo](prorey-logo.png)
-
 by [ProRey Tech](https://prorey.com)
 
 ![PRT Architecture](prt-schema.png)
 
- **PRT** ProRey Testing is Serverless Application orchestrating parallel Lambda Input/Output Adapter tests with Step Function.
+ **PRT** ProRey Testing is Serverless Application orchestrating parallel Component Tests in AWS account
 
 ### PRT Overview
 
@@ -202,7 +200,7 @@ s3://<PrtBucket>/<CronTestInputPrefix>/prt-cron-trigger-<StackIdentifier>/prt_te
 These are PRT Adapter Lambdas that can be used to provide inputs or check outputs during PRT tests execution.
 
 
-* **cloudwatch-output-lambda**
+* **prt-cloudwatch-output-lambda**
 
     Validates CloudWatch logs, see AWS filterPattern docs:
 
