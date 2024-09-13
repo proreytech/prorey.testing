@@ -566,7 +566,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 * Download package from `/code/prt-lambdas.zip`
     * You could also build package from source with
       ```
-      zip prt-lambdas.zip *.py
+      zip code/prt-lambdas.zip *.py
       ```
 * Upload `prt-lambdas.zip` file to PRT S3 `/code` folder
 
