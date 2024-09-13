@@ -577,9 +577,9 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 * Download layer from `/code/prt-util-layer.zip`
     * You could also build layer from sources with
       ```shell
-      python3.11 -m pip install -r prt-util-layer.txt -t util-layer/python/lib/python3.11/site-packages/
+      python3.11 -m pip install -r layers/prt-util-layer.txt -t util-layer/python/lib/python3.11/site-packages/
       cd util-layer
-      zip -r prt-util-layer.zip python
+      zip -r ../code/prt-util-layer.zip python
       ```
 * Upload `prt-util-layer.zip` file to PRT S3 `/code` folder
 
@@ -588,9 +588,9 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 * Download layer from `/code/prt-aurora-layer.zip`
     * You could also build layer from sources with
       ```shell
-      python3.11 -m pip install -r prt-aurora-layer.txt -t aurora-layer/python/lib/python3.11/site-packages/
+      python3.11 -m pip install -r layers/prt-aurora-layer.txt -t aurora-layer/python/lib/python3.11/site-packages/
       cd aurora-layer
-      zip -r prt-aurora-layer.zip python
+      zip -r ../code/prt-aurora-layer.zip python
       ```
 * Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder
 
