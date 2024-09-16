@@ -10,7 +10,7 @@ by [ProRey Tech](https://prorey.com)
 
 ### PRT Overview
 
-Main features
+#### Main features
 
   * PRT tests of AWS components are configured as json files
   * Tests are executed independently of each other at specific time and could be repeated
@@ -18,7 +18,7 @@ Main features
   * Tests are organized in test stories, test story fails if any of its tests fail
   * Test json files could include dynamic calculations with python inline eval
 
-Additional information
+#### Additional information
 
   * PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
   * PRT could be used for bulk data generation or perf testing with repeated data inputs
@@ -26,7 +26,7 @@ Additional information
   * PRT infra is easy to deploy using generic AWS CloudFormation templates
   * PRT could also be used for API Mocking with dynamic responses and retries
 
-Benefits
+#### Benefits
 
   * No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
   * Low infra costs, you pay only when Step Function and Lambdas are invoked
