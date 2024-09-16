@@ -12,7 +12,7 @@ by [ProRey Tech](https://prorey.com)
 
 #### Main features
 
-  * PRT tests of AWS components are configured as json files
+  * PRT interacts with AWS components via tests configured in json format 
   * Tests are executed independently of each other at specific time and could be repeated
   * Tests are either input or output type, input tests write data to resources, output tests read data from resources and validate it using json intersect
   * Tests are organized in test stories, test story fails if any of its tests fail
