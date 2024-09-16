@@ -71,6 +71,8 @@ by [ProRey Tech](https://prorey.com)
 
   **PRT test** files will include json data with dynamically generated key fields and test inputs repeated
 
+Examples of PRT test files for all input and output jsons could be found in `/examples` folder
+
 ### PRT Infra Deployment
 
 * Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
