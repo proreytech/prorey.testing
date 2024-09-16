@@ -10,17 +10,61 @@ by [ProRey Tech](https://prorey.com)
 
 ### PRT Overview
 
-* Simplifies tests generation, can handle multiple async inputs and outputs via Adapter Lambdas
-* Speeds up test execution, using Step Functions, we can execute individual tests in parallel, organized in test stories
-* Can be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
-* Can be used for bulk data generation or perf testing with repeated data inputs
-* Easy to adopt, tests could be launched through AWS console, AWS cli, API call or cron schedule
-* Easy to deploy, PRT is deployed using generic CloudFormation templates
-* No maintenance needed, Serverless Step Function and Lambdas are used 
+* Tests are configured as json files
+* Tests are executed independently of each other at specific times (and could be repeated)
+* Tests are organized in test stories, test story fails if any of its tests fail
+* Tests are either input or output type, input tests write data to resources, output tests read data from resources and validate it using json intersect
+* Test json files could include dynamic calculations using python inline eval
+---
+* PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
+* PRT could be used for bulk data generation or perf testing with repeated data inputs
+* PRT is easy to adopt and integrate, tests could be launched through AWS console, AWS cli, API call or cron schedule
+* PRT infra is easy to deploy using generic AWS CloudFormation templates
+---
+* No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
 * Low infra costs, you pay only when Step Function and Lambdas are invoked
-* Easy to extend, teams could contribute with Input and Output Adapter Lambdas which are lightweight inline editable python
-* Easy to monitor, use rich Step Function Execution UI or Step Function and Lambdas CloudWatch logs
-* Can also be used for API Mocking with dynamic responses and retries
+* Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
+* Easy to monitor, use rich Step Function Execution UI or Step Function and detailed Lambdas CloudWatch logs
+---
+* PRT could also be used for API Mocking with dynamic responses and retries
+
+### Examples of PRT testing of Composite Applications
+
+* **Component Testing of ETL batch processing job**
+
+  **Scenario:** Client has long running batch processing job aggregating data from multiple S3 parquet files and enhancing it with Dynamo tables look ups and API calls.
+  Data is then written to S3 parquet files and streamed into Kinesis audit logging data streams.
+
+  **PRT test** files will include
+    * json objects to generate parquet files in specified S3 location and time when to write data
+    * json dynamo items to be written to specified dynamo tables and time when to write data
+    * json mocks for API calls
+    * json for synthetic SNS event to trigger ETL job and time when to send it
+    * json objects to validate S3 parquet files outputs and time when to do it
+    * json objects to validate data in Kinesis audit logging data streams and time when to do it
+
+* **Performance Testing of ETL batch processing job**
+
+  **Scenario** same as above with bulk synthetic parquet data generated
+
+  **PRT test** files will include Json data with dynamically generated key fields and test inputs repeated
+
+* **Component Testing of realtime streaming application**
+
+  **Scenario** Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data with intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
+
+  **PRT test** files will include
+    * json dynamo items to be written to specified dynamo tables and time when to write data
+    * json kinesis messages to be written to specified source kinesis streams and time when to write data
+    * json kinesis messages to be validate in message bus kinesis streams and time when to do it
+    * json events to validate in specified SQS queues and time when to do it
+    * json data to validate in specified CloudWatch logs and time when to do it
+
+* **Performance Testing of realtime streaming application**
+
+  **Scenario** same as above with bulk data streaming
+
+  **PRT test** files will include json data with dynamically generated key fields and test inputs repeated
 
 ### PRT Infra Deployment
 
@@ -34,7 +78,7 @@ by [ProRey Tech](https://prorey.com)
 
 ### Running PRT Tests
 
-#### Spec for PRT test input json
+#### Spec for PRT test json
 
 ```json
 {
@@ -558,6 +602,40 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
         }
       }
       ```
+
+### Dynamic calculations with python inline eval
+
+  * Use `.$` suffix to indicate `eval` field and `$.` prefix for jsonpath field substitution, for example following json
+    ```json
+    "path": "test",
+    "input": {
+        "source_key.$": "'$.path/' + datetime.datetime.now().strftime('%d%m%Y') + '/test_source_s3.json'",
+        "destination_key.$": "'$.path/test-destination/test_dest_' + str(uuid.uuid4()) + '.json'"
+      }
+    ```
+    will be evaluated to the following test `input` json, calculating today's date and random uuid
+    ```json
+    "input": {
+        "source_key": "test/16092024/test_source_s3.json'",
+        "destination_key": "test/test-destination/test_dest_0adb9772-7d60-45a8-8003-3946eefffc4b.json"
+      }
+    ```
+
+  * Use `$$.Region`, `$$.Account`, `$$.ExecutionName`, `$$.StartTime` syntax to inject variables from step function context, eg
+    ```json
+    "lambda_config": {
+        "lambda_arn.$": "arn:aws:lambda:$$.Region:$$.Account:function:CountNodesLambda",
+        "invocation_type": "sync"
+      }
+    ```
+    will be evaluated using step function region and account as
+    ```json
+    "lambda_config": {
+        "lambda_arn": "arn:aws:lambda:us-east-1:123412341234:function:CountNodesLambda",
+        "invocation_type": "sync"
+      }
+    ```
+
 
 ### Deploy PRT Lambdas package
 
