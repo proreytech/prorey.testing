@@ -10,23 +10,28 @@ by [ProRey Tech](https://prorey.com)
 
 ### PRT Overview
 
-* Tests are configured as json files
-* Tests are executed independently of each other at specific times (and could be repeated)
-* Tests are organized in test stories, test story fails if any of its tests fail
-* Tests are either input or output type, input tests write data to resources, output tests read data from resources and validate it using json intersect
-* Test json files could include dynamic calculations using python inline eval
----
-* PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
-* PRT could be used for bulk data generation or perf testing with repeated data inputs
-* PRT is easy to adopt and integrate, tests could be launched through AWS console, AWS cli, API call or cron schedule
-* PRT infra is easy to deploy using generic AWS CloudFormation templates
----
-* No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
-* Low infra costs, you pay only when Step Function and Lambdas are invoked
-* Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
-* Easy to monitor, use rich Step Function Execution UI or Step Function and detailed Lambdas CloudWatch logs
----
-* PRT could also be used for API Mocking with dynamic responses and retries
+Main features
+
+  * PRT tests of AWS components are configured as json files
+  * Tests are executed independently of each other at specific time and could be repeated
+  * Tests are either input or output type, input tests write data to resources, output tests read data from resources and validate it using json intersect
+  * Tests are organized in test stories, test story fails if any of its tests fail
+  * Test json files could include dynamic calculations with python inline eval
+
+Additional information
+
+  * PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
+  * PRT could be used for bulk data generation or perf testing with repeated data inputs
+  * PRT is easy to adopt and integrate, tests could be launched through AWS console, AWS cli, API call or cron schedule
+  * PRT infra is easy to deploy using generic AWS CloudFormation templates
+  * PRT could also be used for API Mocking with dynamic responses and retries
+
+Benefits
+
+  * No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
+  * Low infra costs, you pay only when Step Function and Lambdas are invoked
+  * Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
+  * Easy to monitor, use rich Step Function Execution UI or Step Function and detailed Lambdas CloudWatch logs
 
 ### Examples of PRT testing of Composite Applications
 
@@ -47,11 +52,11 @@ by [ProRey Tech](https://prorey.com)
 
   **Scenario** same as above with bulk synthetic parquet data generated
 
-  **PRT test** files will include Json data with dynamically generated key fields and test inputs repeated
+  **PRT test** files will include json data with dynamically generated key fields and test inputs repeated
 
 * **Component Testing of realtime streaming application**
 
-  **Scenario** Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data with intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
+  **Scenario** Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
 
   **PRT test** files will include
     * json dynamo items to be written to specified dynamo tables and time when to write data
