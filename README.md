@@ -8,9 +8,9 @@ by [ProRey Tech](https://prorey.com)
 
  **PRT** ProRey Testing is Serverless Application orchestrating parallel Component Tests in AWS account
 
-### PRT Overview
+## PRT Overview
 
-#### Main features
+### Main features
 
   * PRT interacts with AWS components via tests configured in json format 
   * Tests are executed independently of each other at specific time and could be repeated
@@ -18,7 +18,7 @@ by [ProRey Tech](https://prorey.com)
   * Tests are organized in test stories, test story fails if any of its tests fail
   * Test json files could include dynamic calculations with python inline eval
 
-#### Additional information
+### Additional information
 
   * PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
   * PRT could be used for bulk data generation or perf testing with repeated data inputs
@@ -26,21 +26,22 @@ by [ProRey Tech](https://prorey.com)
   * PRT infra is easy to deploy using generic AWS CloudFormation templates
   * PRT could also be used for API Mocking with dynamic responses and retries
 
-#### Benefits
+### Benefits
 
   * No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
   * Low infra costs, you pay only when Step Function and Lambdas are invoked
   * Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
   * Easy to monitor, use rich Step Function Execution UI or Step Function and detailed Lambdas CloudWatch logs
 
-### Examples of PRT Component Tests of Composite Applications
+## Examples of PRT Component Tests of Composite Applications
 
-#### Component Testing of ETL batch processing job
-  ##### Composite Application
+### Component Tests of ETL Batch Processing Job
+
+#### Composite Application
   Client has long running ETL Batch processing job aggregating data from multiple S3 parquet source files and enhancing it with Dynamo Table look ups and API calls.
   Data is then written to S3 parquet result files and streamed into Kinesis audit log. Batch processing is triggered with SNS event.
 
-  ##### PRT Component Tests
+#### PRT Component Tests
   1. json data to generate parquet files in S3 locations and time when to write data
   2. json dynamo items to be written to Dynamo Table and time when to write data
   3. json mocks for API calls
@@ -50,20 +51,20 @@ by [ProRey Tech](https://prorey.com)
   
   ![PRT Batch](prt-batch.png)
 
-#### Performance Testing of ETL batch processing job
+### Performance Tests of ETL Batch Processing Job
 
-  ##### Composite Application
+#### Composite Application
   Same as above with bulk synthetic parquet data generated
 
-  ##### PRT Component Tests
+#### PRT Component Tests
   Includes json data with dynamically generated key fields and test inputs repeated
 
-#### Component Testing of realtime streaming application
+### Component Tests of Realtime Streaming Application
 
-  ##### Composite Application
+#### Composite Application
   Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
 
-  ##### PRT Component Tests
+#### PRT Component Tests
   1. json dynamo items to be written to Dynamo Table and time when to write data
   2. json kinesis messages to be written to Kinesis source and time when to write data
   3. json data to validate in Kinesis message bus and time when to do it
@@ -73,18 +74,18 @@ by [ProRey Tech](https://prorey.com)
   ![PRT Stream](prt-stream.png)
 
 
-#### Performance Testing of realtime streaming application
+### Performance Testing of Realtime Streaming Application
 
-  ##### Composite Application
+#### Composite Application
   Same as above with bulk data streaming
 
-  ##### PRT Component Tests
+#### PRT Component Tests
   Includes json data with dynamically generated key fields and test inputs repeated
 
-#### Examples of PRT test files
+### Examples of PRT test files
   for all input and output jsons could be found in `/examples` folder
 
-### PRT Infra Deployment
+## PRT Infra Deployment
 
 * Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template, provide `StackIdentifier` and `PrtBucket` parameters
@@ -94,9 +95,9 @@ by [ProRey Tech](https://prorey.com)
     * For PRT Cron Trigger tests execution, configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see [Run PRT tests with AWS Cron Trigger](#run-prt-tests-with-aws-cron-trigger) section
     * For PRT Mock virtualization, upload mocks to PRT S3 Bucket, see [Configure PRT Mocks](#configure-prt-mocks) section
 
-### Running PRT Tests
+## Running PRT Tests
 
-#### Spec for PRT test json
+### Spec for PRT test json
 
 ```json
 {
@@ -120,7 +121,7 @@ by [ProRey Tech](https://prorey.com)
   }
 ```
 
-#### PRT API Lambda Interface
+### PRT API Lambda Interface
 
 * PRT API call example (through Gateway) to start PRT execution with **`POST`** `/test` endpoint
   ```shell
@@ -226,7 +227,7 @@ by [ProRey Tech](https://prorey.com)
   }
   ```
 
-#### Run PRT tests with AWS CLI
+### Run PRT tests with AWS CLI
 
 * Run tests in PRT Step Function with test input file
   ```shell
@@ -237,7 +238,7 @@ by [ProRey Tech](https://prorey.com)
   --profile <profile>
   ```
 
-#### Run PRT tests with AWS Admin Console
+### Run PRT tests with AWS Admin Console
 
 * Open Step Functions service in AWS console
 * Find PRT step function in State Machines list
@@ -245,7 +246,7 @@ by [ProRey Tech](https://prorey.com)
 * Monitor parallel tests running in `Graph View`, click `Run Test Router` to see individual test inputs and outputs
 * Check test results in `Execution Input and Output` tab
 
-#### Run PRT tests with AWS Cron Trigger
+### Run PRT tests with AWS Cron Trigger
 
 Configure following parameters to eg run every day
 ```yaml
@@ -259,7 +260,7 @@ PRT will run according to `CronTriggerExpression` expression, pulling test input
 s3://<PrtBucket>/<CronTestInputPrefix>/prt-cron-trigger-<StackIdentifier>/prt_test.json
 ```
 
-### PRT Adapter Lambdas
+## PRT Adapter Lambdas
 
 These are PRT Adapter Lambdas that can be used to provide inputs or check outputs during PRT tests execution.
 
@@ -621,7 +622,7 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
       }
       ```
 
-### Dynamic calculations with python inline eval
+## Dynamic calculations with python inline eval
 
   * Use `.$` suffix to indicate `eval` field and `$.` prefix for jsonpath field substitution, for example following json
     ```json
@@ -655,7 +656,7 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
     ```
 
 
-### Deploy PRT Lambdas package
+## Deploy PRT Lambdas package
 
 PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 
@@ -666,9 +667,9 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       ```
 * Upload `prt-lambdas.zip` file to PRT S3 `/code` folder
 
-### Deploy PRT Layers
+## Deploy PRT Layers
 
-#### Deploy PRT Util Layer
+### Deploy PRT Util Layer
 
 * Download layer from `/code/prt-util-layer.zip`
     * You could also build layer from sources with
@@ -679,7 +680,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       ```
 * Upload `prt-util-layer.zip` file to PRT S3 `/code` folder
 
-#### Deploy PRT Aurora Layer
+### Deploy PRT Aurora Layer
 
 * Download layer from `/code/prt-aurora-layer.zip`
     * You could also build layer from sources with
@@ -690,12 +691,12 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       ```
 * Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder
 
-#### Deploy AWS Pandas Layer
+### Deploy AWS Pandas Layer
 
 * Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
 * Upload `AWSSDKPandas-Python311.zip` file to PRT S3 `/code` folder
 
-# PRT Mock
+## PRT Mock
 
 **PRT Mock** is serverless application where Lambda API used for mocking API calls.
 PRT Mock could be used to ease tests isolation.
@@ -766,7 +767,7 @@ PRT Mock could be used to ease tests isolation.
 }
 ```
 
-### Configure PRT Mocks
+## Configure PRT Mocks
 
 * Upload S3 lambda mocks to `PrtBucket` and PRT Mock will use `LambdaMockPrefix` to retrieve them recursively.
 
