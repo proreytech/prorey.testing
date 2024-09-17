@@ -37,16 +37,18 @@ by [ProRey Tech](https://prorey.com)
 
 * **Component Testing of ETL batch processing job**
 
-  **Scenario:** Client has long running batch processing job aggregating data from multiple S3 parquet files and enhancing it with Dynamo tables look ups and API calls.
-  Data is then written to S3 parquet files and streamed into Kinesis audit logging data streams.
+  **Scenario:** Client has long running ETL Batch processing job aggregating data from multiple S3 parquet source files and enhancing it with Dynamo Table look ups and API calls.
+  Data is then written to S3 parquet result files and streamed into Kinesis audit log data streams. Batch processing is triggered with SNS event.
 
-  **PRT test** files will include
-    * json objects to generate parquet files in specified S3 location and time when to write data
-    * json dynamo items to be written to specified dynamo tables and time when to write data
-    * json mocks for API calls
-    * json for synthetic SNS event to trigger ETL job and time when to send it
-    * json objects to validate S3 parquet files outputs and time when to do it
-    * json objects to validate data in Kinesis audit logging data streams and time when to do it
+  **PRT test** will include
+    1. json data to generate parquet files in S3 locations and time when to write data
+    2. json dynamo items to be written to Dynamo Table and time when to write data
+    3. json mocks for API calls
+    4. json for synthetic SNS event to trigger ETL job and time when to send it
+    5. json data to validate S3 parquet files outputs and time when to do it
+    6. json data to validate data in Kinesis audit logging data streams and time when to do it
+  
+  ![PRT Batch](prt-batch.png)
 
 * **Performance Testing of ETL batch processing job**
 
@@ -59,11 +61,14 @@ by [ProRey Tech](https://prorey.com)
   **Scenario** Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
 
   **PRT test** files will include
-    * json dynamo items to be written to specified dynamo tables and time when to write data
-    * json kinesis messages to be written to specified source kinesis streams and time when to write data
-    * json kinesis messages to be validate in message bus kinesis streams and time when to do it
-    * json events to validate in specified SQS queues and time when to do it
-    * json data to validate in specified CloudWatch logs and time when to do it
+    1. json dynamo items to be written to Dynamo Table and time when to write data
+    2. json kinesis messages to be written to Kinesis Stream source and time when to write data
+    3. json kinesis messages to be validate in Kinesis message bus and time when to do it
+    4. json events to validate in SQS events queue and time when to do it
+    5. json data to validate in CloudWatch logs and time when to do it
+
+  ![PRT Stream](prt-stream.png)
+
 
 * **Performance Testing of realtime streaming application**
 
