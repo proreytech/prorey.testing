@@ -66,7 +66,7 @@ by [ProRey Tech](https://prorey.com)
   ##### PRT Component Tests
   1. json dynamo items to be written to Dynamo Table and time when to write data
   2. json kinesis messages to be written to Kinesis Stream source and time when to write data
-  3. json kinesis messages to be validate in Kinesis message bus and time when to do it
+  3. json kinesis messages to be validated in Kinesis message bus and time when to do it
   4. json events to validate in SQS events queue and time when to do it
   5. json data to validate in CloudWatch logs and time when to do it
 
