@@ -42,12 +42,14 @@ by [ProRey Tech](https://prorey.com)
   Data is then written to S3 parquet result files and streamed into Kinesis audit log. Batch processing is triggered with SNS event.
 
 #### PRT Component Tests
-  1. json data to generate parquet files in S3 locations and time when to write data
-  2. json dynamo items to be written to Dynamo Table and time when to write data
-  3. json mocks for API calls
-  4. json for synthetic SNS event to trigger ETL job and time when to send it
-  5. json data to validate S3 parquet files outputs and time when to do it
-  6. json data to validate messages in Kinesis audit log and time when to do it
+  PRT Tests include resource connectivity config, timing of tests and following json fields
+  
+  1. Data to generate parquet files in S3 locations
+  2. Dynamo items to be written to Dynamo Table
+  3. Mocks for API calls
+  4. Data for synthetic SNS event to trigger ETL job
+  5. Data to validate S3 parquet files outputs
+  6. Data to validate messages in Kinesis audit log
   
   ![PRT Batch](prt-batch.png)
 
@@ -65,11 +67,13 @@ by [ProRey Tech](https://prorey.com)
   Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
 
 #### PRT Component Tests
-  1. json dynamo items to be written to Dynamo Table and time when to write data
-  2. json kinesis messages to be written to Kinesis source and time when to write data
-  3. json data to validate in Kinesis message bus and time when to do it
-  4. json events to validate in SQS events queue and time when to do it
-  5. json data to validate in CloudWatch logs and time when to do it
+  PRT Tests include resource connectivity config, timing of tests and following json fields
+
+  1. Dynamo items to be written to Dynamo Table and time when to write data
+  2. Kinesis messages to be written to Kinesis source and time when to write data
+  3. Data to validate in Kinesis message bus and time when to do it
+  4. Events to validate in SQS events queue and time when to do it
+  5. Data to validate in CloudWatch logs and time when to do it
 
   ![PRT Stream](prt-stream.png)
 
@@ -154,7 +158,7 @@ by [ProRey Tech](https://prorey.com)
         "story_name": "PRT SQS Test",
         "lambda_adapter": "prt-sqs-input-lambda",
         "lambda_config": {
-          "queue_url": "https://sqs.us-east-1.amazonaws.com/{{AWS_ID}}/prt-sqs-test"
+          "queue_url.$": "https://sqs.$$.Region.amazonaws.com/$$.Account/prt-sqs-test"
         },
         "input": {
           "name": "Bob",
@@ -169,7 +173,7 @@ by [ProRey Tech](https://prorey.com)
         "story_name": "PRT SQS Test",
         "lambda_adapter": "prt-sqs-output-lambda",
         "lambda_config": {
-          "queue_url": "https://sqs.us-east-1.amazonaws.com/{{AWS_ID}}/prt-sqs-test"
+          "queue_url.$": "https://sqs.$$.Region.amazonaws.com/$$.Account/prt-sqs-test"
         },
         "output": {
           "Messages": [
