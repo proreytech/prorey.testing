@@ -38,7 +38,7 @@ by [ProRey Tech](https://prorey.com)
 #### Component Testing of ETL batch processing job
   ##### Composite Application
   Client has long running ETL Batch processing job aggregating data from multiple S3 parquet source files and enhancing it with Dynamo Table look ups and API calls.
-  Data is then written to S3 parquet result files and streamed into Kinesis audit log data streams. Batch processing is triggered with SNS event.
+  Data is then written to S3 parquet result files and streamed into Kinesis audit log. Batch processing is triggered with SNS event.
 
   ##### PRT Component Tests
   1. json data to generate parquet files in S3 locations and time when to write data
@@ -46,7 +46,7 @@ by [ProRey Tech](https://prorey.com)
   3. json mocks for API calls
   4. json for synthetic SNS event to trigger ETL job and time when to send it
   5. json data to validate S3 parquet files outputs and time when to do it
-  6. json data to validate data in Kinesis audit logging data streams and time when to do it
+  6. json data to validate messages in Kinesis audit log and time when to do it
   
   ![PRT Batch](prt-batch.png)
 
@@ -65,8 +65,8 @@ by [ProRey Tech](https://prorey.com)
 
   ##### PRT Component Tests
   1. json dynamo items to be written to Dynamo Table and time when to write data
-  2. json kinesis messages to be written to Kinesis Stream source and time when to write data
-  3. json kinesis messages to validate in Kinesis message bus and time when to do it
+  2. json kinesis messages to be written to Kinesis source and time when to write data
+  3. json data to validate in Kinesis message bus and time when to do it
   4. json events to validate in SQS events queue and time when to do it
   5. json data to validate in CloudWatch logs and time when to do it
 
