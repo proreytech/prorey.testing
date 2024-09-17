@@ -33,14 +33,14 @@ by [ProRey Tech](https://prorey.com)
   * Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
   * Easy to monitor, use rich Step Function Execution UI or Step Function and detailed Lambdas CloudWatch logs
 
-### Examples of PRT testing of Composite Applications
+### Examples of PRT Component Tests of Composite Applications
 
 #### Component Testing of ETL batch processing job
-
-  **Scenario:** Client has long running ETL Batch processing job aggregating data from multiple S3 parquet source files and enhancing it with Dynamo Table look ups and API calls.
+  ##### Composite Application
+  Client has long running ETL Batch processing job aggregating data from multiple S3 parquet source files and enhancing it with Dynamo Table look ups and API calls.
   Data is then written to S3 parquet result files and streamed into Kinesis audit log data streams. Batch processing is triggered with SNS event.
 
-  **PRT test** will include
+  ##### PRT Component Tests
   1. json data to generate parquet files in S3 locations and time when to write data
   2. json dynamo items to be written to Dynamo Table and time when to write data
   3. json mocks for API calls
@@ -52,15 +52,18 @@ by [ProRey Tech](https://prorey.com)
 
 #### Performance Testing of ETL batch processing job
 
-  **Scenario** same as above with bulk synthetic parquet data generated
+  ##### Composite Application
+  Same as above with bulk synthetic parquet data generated
 
-  **PRT test** files will include json data with dynamically generated key fields and test inputs repeated
+  ##### PRT Component Tests
+  Includes json data with dynamically generated key fields and test inputs repeated
 
 #### Component Testing of realtime streaming application
 
-  **Scenario** Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
+  ##### Composite Application
+  Client has realtime streaming application listening to source dynamo and kinesis steams, aggregating and transforming data via intermediate kinesis message bus and writing data out to SQS queues and logging with CloudWatch logs
 
-  **PRT test** files will include
+  ##### PRT Component Tests
   1. json dynamo items to be written to Dynamo Table and time when to write data
   2. json kinesis messages to be written to Kinesis Stream source and time when to write data
   3. json kinesis messages to be validate in Kinesis message bus and time when to do it
@@ -72,9 +75,11 @@ by [ProRey Tech](https://prorey.com)
 
 #### Performance Testing of realtime streaming application
 
-  **Scenario** same as above with bulk data streaming
+  ##### Composite Application
+  Same as above with bulk data streaming
 
-  **PRT test** files will include json data with dynamically generated key fields and test inputs repeated
+  ##### PRT Component Tests
+  Includes json data with dynamically generated key fields and test inputs repeated
 
 Examples of PRT test files for all input and output jsons could be found in `/examples` folder
 
