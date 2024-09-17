@@ -43,8 +43,8 @@ by [ProRey Tech](https://prorey.com)
 
 #### PRT Component Tests
   PRT Tests include resource connectivity config, timing of tests and following json fields
-  
-  1. Data to generate parquet files in S3 locations
+
+  1. Data to generate parquet files in S3 source locations
   2. Dynamo items to be written to Dynamo Table
   3. Mocks for API calls
   4. Data for synthetic SNS event to trigger ETL job
@@ -69,11 +69,11 @@ by [ProRey Tech](https://prorey.com)
 #### PRT Component Tests
   PRT Tests include resource connectivity config, timing of tests and following json fields
 
-  1. Dynamo items to be written to Dynamo Table and time when to write data
-  2. Kinesis messages to be written to Kinesis source and time when to write data
-  3. Data to validate in Kinesis message bus and time when to do it
-  4. Events to validate in SQS events queue and time when to do it
-  5. Data to validate in CloudWatch logs and time when to do it
+  1. Dynamo items to be written to source Dynamo Table
+  2. Kinesis messages to be written to Kinesis source
+  3. Data to validate in Kinesis message bus
+  4. Events to validate in SQS events queue
+  5. Data to validate in CloudWatch logs
 
   ![PRT Stream](prt-stream.png)
 
