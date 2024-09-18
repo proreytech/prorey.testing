@@ -10,6 +10,12 @@ by [ProRey Tech](https://prorey.com)
 
 ## PRT Overview
 
+ProRey Testing (PRT) Serverless Infra is installed in customers AWS account and consists of API Gateway to enable Rest API interface, Step Function to orchestrate individual tests and Lambda Adapters performing these tests on customers AWS resources.
+
+Tests are run in parallel at specified time intervals, could be repeated and are configured with json to describe which resources to access and data to use. Input tests write to AWS resources and output tests validate results on AWS resources via json intersects.
+
+Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S3 (json and parquet), Dynamo, CloudWatch, IAM, Aurora and StepFunction AWS resources and APIs testing and mocking.
+
 ### Main features
 
   * PRT interacts with AWS components via tests configured in json format 
