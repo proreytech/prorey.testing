@@ -6,7 +6,7 @@ by [ProRey Tech](https://prorey.com)
 
 ![PRT Architecture](prt-schema.png)
 
- **PRT** ProRey Testing is Serverless Application orchestrating parallel Component Tests in AWS account
+**ProRey Testing (PRT)** is Serverless Application orchestrating component, integration and performance tests in AWS account
 
 ## PRT Overview
 
