@@ -6,26 +6,34 @@ by [ProRey Tech](https://prorey.com)
 
 ![PRT Architecture](prt-schema.png)
 
-**ProRey Testing (PRT)** is Serverless Application orchestrating component, integration and performance tests in AWS account
+**ProRey Testing (PRT)** is Serverless Application orchestrating Component, Integration and Performance Tests in AWS account
 
 ## PRT Overview
-
-ProRey Testing (PRT) Serverless Infra is installed in customers AWS account and consists of API Gateway to enable Rest API interface, Step Function to orchestrate individual tests and Lambda Adapters performing these tests on customers AWS resources.
+PRT Serverless Infra is installed in customers AWS account and consists of API Gateway to enable Rest API interface, Step Function to orchestrate individual tests and Lambda Adapters performing these tests on customers AWS resources.
 
 Tests are run in parallel at specified time intervals, could be repeated and are configured with json to describe which resources to access and data to use. Input tests write to AWS resources and output tests validate results on AWS resources via json intersects.
 
-Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S3 (json and parquet), Dynamo, CloudWatch, IAM, Aurora and StepFunction AWS resources and APIs testing and mocking.
+PRT supports testing and data conditioning of
+* Lambda
+* Kinesis
+* SNS
+* SQS
+* S3 (json and parquet)
+* Dynamo
+* CloudWatch
+* IAM
+* Aurora 
+* StepFunction 
+* APIs (testing and mocking)
 
-### Main features
-
+### Main Features
   * PRT interacts with AWS components via tests configured in json format 
   * Tests are executed independently of each other at specific time and could be repeated
   * Tests are either input or output type, input tests write data to resources, output tests read data from resources and validate it using json intersect
   * Tests are organized in test stories, test story fails if any of its tests fail
   * Test json files could include dynamic calculations with python inline eval
 
-### Additional information
-
+### Additional Use Cases
   * PRT could be used for data conditioning to write dynamic synthetic data adhoc or with cron schedule
   * PRT could be used for bulk data generation or perf testing with repeated data inputs
   * PRT is easy to adopt and integrate, tests could be launched through AWS console, AWS cli, API call or cron schedule
@@ -33,7 +41,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
   * PRT could also be used for API Mocking with dynamic responses and retries
 
 ### Benefits
-
   * No servers maintenance needed, serverless AWS Step Function and Lambdas are used 
   * Low infra costs, you pay only when Step Function and Lambdas are invoked
   * Easy to extend, add Input and Output Adapter Lambdas as lightweight inline editable python utilizing boto3
@@ -83,7 +90,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
 
   ![PRT Stream](prt-stream.png)
 
-
 ### Performance Testing of Realtime Streaming Application
 
 #### Composite Application
@@ -96,7 +102,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
   for all input and output jsons could be found in `/examples` folder
 
 ## PRT Infra Deployment
-
 * Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
@@ -108,7 +113,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
 ## Running PRT Tests
 
 ### Spec for PRT test json
-
 ```json
 {
     "test_run_name": "<Name of Test Run>",
@@ -132,7 +136,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
 ```
 
 ### PRT API Lambda Interface
-
 * PRT API call example (through Gateway) to start PRT execution with **`POST`** `/test` endpoint
   ```shell
   curl -kLX POST 'https://'${API_ID}'.execute-api.us-east-1.amazonaws.com/prt/test' \
@@ -238,7 +241,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
   ```
 
 ### Run PRT tests with AWS CLI
-
 * Run tests in PRT Step Function with test input file
   ```shell
   aws stepfunctions start-execution \
@@ -249,7 +251,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
   ```
 
 ### Run PRT tests with AWS Admin Console
-
 * Open Step Functions service in AWS console
 * Find PRT step function in State Machines list
 * Click `Start Execution` button and copy test input json into `Input` text box
@@ -257,7 +258,6 @@ Currently supports testing and data conditioning of Lambda, Kinesis, SNS, SQS, S
 * Check test results in `Execution Input and Output` tab
 
 ### Run PRT tests with AWS Cron Trigger
-
 Configure following parameters to eg run every day
 ```yaml
 CronTriggerExpression: run(1 day)
@@ -271,9 +271,7 @@ s3://<PrtBucket>/<CronTestInputPrefix>/prt-cron-trigger-<StackIdentifier>/prt_te
 ```
 
 ## PRT Adapter Lambdas
-
 These are PRT Adapter Lambdas that can be used to provide inputs or check outputs during PRT tests execution.
-
 
 * **prt-cloudwatch-output-lambda**
 
@@ -633,7 +631,6 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
       ```
 
 ## Dynamic calculations with python inline eval
-
   * Use `.$` suffix to indicate `eval` field and `$.` prefix for jsonpath field substitution, for example following json
     ```json
     "path": "test",
@@ -667,7 +664,6 @@ These are PRT Adapter Lambdas that can be used to provide inputs or check output
 
 
 ## Deploy PRT Lambdas package
-
 PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 
 * Download package from `/code/prt-lambdas.zip`
@@ -680,7 +676,6 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 ## Deploy PRT Layers
 
 ### Deploy PRT Util Layer
-
 * Download layer from `/code/prt-util-layer.zip`
     * You could also build layer from sources with
       ```shell
@@ -691,7 +686,6 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 * Upload `prt-util-layer.zip` file to PRT S3 `/code` folder
 
 ### Deploy PRT Aurora Layer
-
 * Download layer from `/code/prt-aurora-layer.zip`
     * You could also build layer from sources with
       ```shell
@@ -702,17 +696,14 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
 * Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder
 
 ### Deploy AWS Pandas Layer
-
 * Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
 * Upload `AWSSDKPandas-Python311.zip` file to PRT S3 `/code` folder
 
 ## PRT Mock
-
 **PRT Mock** is serverless application where Lambda API used for mocking API calls.
 PRT Mock could be used to ease tests isolation.
 
 ### Spec for Lambda Mock File
-
 ```json
 {
   "mocks": [
@@ -743,6 +734,7 @@ PRT Mock could be used to ease tests isolation.
   ]
 }
 ```  
+
 * PRT Mock API call with **`GET`** `/mock` endpoint, API Gateway example
   ```shell
   curl -kLX GET 'https://'${API_ID}'.execute-api.us-east-1.amazonaws.com/prt/mock/oauth2/token'
@@ -778,7 +770,6 @@ PRT Mock could be used to ease tests isolation.
 ```
 
 ## Configure PRT Mocks
-
 * Upload S3 lambda mocks to `PrtBucket` and PRT Mock will use `LambdaMockPrefix` to retrieve them recursively.
 
 * Use PRT API Gateway url to check that lambda mock is healthy
@@ -790,7 +781,6 @@ PRT Mock could be used to ease tests isolation.
 ## APIs Mocking  
 
 ### Request Matching  
-
 Refer to `lambda_mock.py` for details, code is straightforward and inline editable.  
 Code is using `get_json_intersection(expected, actual)` util for json matching   
 
@@ -817,7 +807,6 @@ Code is using `get_json_intersection(expected, actual)` util for json matching
 ### Response
 
 #### Response Body
-
 * **json body**   
   use full json, eg
   ```json
@@ -832,11 +821,9 @@ Code is using `get_json_intersection(expected, actual)` util for json matching
   `"body": "PFM6RW52ZWxvcGUgeG1sbnM6Uz0iaHR0cDov..."`
 
 #### Static Response 
-
 Once a request is made, PRT Mock will try to find a matching mock and will return response body found in the mock. 
 
 #### Dynamic Response with eval
-
   PRT Mock uses `eval` flag for response to be dynamically evaluated with python `eval()` function. It uses `.$` suffix to indicate eval field and `$.` prefix for request jsonpath field substitution.
 
   Request example with dynamic response
@@ -879,9 +866,7 @@ Once a request is made, PRT Mock will try to find a matching mock and will retur
   ```
 
 #### Mock Retries
-
 Configure `retryCount` to number of times PRT mock will return `retryStatusCode` with `retryBody`before returning regular `response`. After that cycle repeats. This feature could be used to test orchestrator APIs error handling.
 
 #### Mock Timeout  
-
 Use `timeout`(ms) field in mock file to configure API response timeout
