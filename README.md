@@ -14,6 +14,7 @@ PRT Serverless Infra is installed in customers AWS account and consists of API G
 Tests are run in parallel at specified time intervals, could be repeated and are configured with json to describe which resources to access and data to use. Input tests write to AWS resources and output tests validate results on AWS resources via json intersects.
 
 PRT supports testing and data conditioning of
+
 * Lambda
 * Kinesis
 * SNS
@@ -256,6 +257,9 @@ PRT supports testing and data conditioning of
 * Click `Start Execution` button and copy test input json into `Input` text box
 * Monitor parallel tests running in `Graph View`, click `Run Test Router` to see individual test inputs and outputs
 * Check test results in `Execution Input and Output` tab
+![PRT Steps](prt-execution.png)
+* Look through PRT Step Function states for more details, links and logs
+![PRT Steps](prt-steps.png)
 
 ### Run PRT tests with AWS Cron Trigger
 Configure following parameters to eg run every day
