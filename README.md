@@ -848,7 +848,7 @@ Once a request is made, PRT Mock will try to find a matching mock and will retur
     "name": "Bob",
     "today.$": "datetime.datetime.now().strftime('%d/%m/%Y')",
     "tomorrow.$": "(datetime.datetime.now() + datetime.timedelta(days=1)).strftime('%d/%m/%Y')",
-    "upcoming": {
+    "payment": {
       "status": "PENDING",
       "calculated_date.$": "(datetime.datetime.strptime('$.date', '%b %d, %Y') + datetime.timedelta(days=30)).strftime('%d/%m/%Y')",
       "calculated_amount.$": "str(round(float('$.current.amount') * 1.1, 2))"
@@ -862,7 +862,7 @@ Once a request is made, PRT Mock will try to find a matching mock and will retur
     "name": "Bob",
     "today": "28/06/2023",
     "tomorrow": "29/06/2023",
-    "upcoming": {
+    "payment": {
       "status": "PENDING",
       "calculated_date": "15/07/2023",
       "calculated_amount": "10.99"
