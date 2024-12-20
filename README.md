@@ -100,9 +100,10 @@ PRT supports testing and data conditioning of
   Includes json data with dynamically generated key fields and test inputs repeated
 
 ### Examples of PRT test files
-  for all input and output jsons could be found in `/examples` folder
+  for all input and output jsons could be found in `/examples` folder (included in private repo)
 
 ## PRT Infra Deployment
+* CloudFormation and Lambda code are included in Bitbucket private repo, pease inquire with tech@prorey.com
 * Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
@@ -675,7 +676,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       ```
       zip code/prt-lambdas.zip *.py
       ```
-* Upload `prt-lambdas.zip` file to PRT S3 `/code` folder
+* Upload `prt-lambdas.zip` file to PRT S3 `/code` folder (included in private repo)
 
 ## Deploy PRT Layers
 
@@ -687,7 +688,7 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       cd util-layer
       zip -r ../code/prt-util-layer.zip python
       ```
-* Upload `prt-util-layer.zip` file to PRT S3 `/code` folder
+* Upload `prt-util-layer.zip` file to PRT S3 `/code` folder (included in private repo)
 
 ### Deploy PRT Aurora Layer
 * Download layer from `/code/prt-aurora-layer.zip`
@@ -697,11 +698,11 @@ PRT Lambdas are packaged in zip library used by CloudFormation to deploy infra
       cd aurora-layer
       zip -r ../code/prt-aurora-layer.zip python
       ```
-* Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder
+* Upload `prt-aurora-layer.zip` file to PRT S3 `/code` folder (included in private repo)
 
 ### Deploy AWS Pandas Layer
 * Download AWS provided pandas layer, eg [AWSSDKPandas-Python311](https://serverlessrepo.aws.amazon.com/applications/us-east-1/336392948345/aws-sdk-pandas-layer-py3-11)
-* Upload `AWSSDKPandas-Python311.zip` file to PRT S3 `/code` folder
+* Upload `AWSSDKPandas-Python311.zip` file to PRT S3 `/code` folder (included in private repo)
 
 ## PRT Mock
 **PRT Mock** is serverless application where Lambda API used for mocking API calls.
