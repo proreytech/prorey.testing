@@ -107,7 +107,7 @@ PRT supports testing and data conditioning of
 * Create PRT S3 Bucket and deploy PRT code, see [Deploy PRT Lambdas package](#deploy-prt-lambdas-package) and [Deploy PRT Layers](#deploy-prt-layers) sections
 * Deploy PRT Step Function and Lambdas with CloudFormation template, provide `StackIdentifier` and `PrtBucket` parameters
 * Deploy PRT API Gateway with CloudFormation template `prt-api.yaml`, provide `StackIdentifier` parameter (or deploy PRT ALB with CloudFormation template `prt-alb.yaml`)
-* Add IAM policies to `prt-lambda-role-<StackIdentifier>` role to grant resources access to PRT Adapter Lambdas, see eg `prt-adapters-policy.json`
+* Add IAM policies to `prt-lambda-role-<StackIdentifier>` role to grant resources access to PRT Adapter Lambdas, see eg `/examples/prt-adapters-policy.json` (included in private repo)
     * API Gateway integration timeout `TimeoutInMillis` in `prt-infra.yaml` could be increased from default max `29000`ms to `180000`ms by AWS service limit increase request
     * For PRT Cron Trigger tests execution, configure `prt-cron-trigger-<StackIdentifier>` EventBridge rule and upload `prt_test.json` to PRT S3 Bucket, see [Run PRT tests with AWS Cron Trigger](#run-prt-tests-with-aws-cron-trigger) section
     * For PRT Mock virtualization, upload mocks to PRT S3 Bucket, see [Configure PRT Mocks](#configure-prt-mocks) section
